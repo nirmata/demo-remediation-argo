@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-demo
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/nirmata/demo-remediator.git
+    targetRevision: HEAD
+    path: apps/nginx
+  destination:
+    server: https://D130D24E1665A9C2D1AF12D0C7BDD7B8.yl4.us-west-1.eks.amazonaws.com
+    namespace: nginx
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+
