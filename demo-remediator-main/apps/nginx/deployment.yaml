@@ -4,7 +4,6 @@ metadata:
   name: nginx
   labels:
     app: nginx
-  annotations: {}
 spec:
   replicas: 1
   selector:
