@@ -4,6 +4,7 @@ metadata:
   name: nginx
   labels:
     app: nginx
+  annotations: {}
 spec:
   replicas: 1
   selector:
@@ -24,8 +25,8 @@ spec:
         - containerPort: 80
         securityContext:
           privileged: false
-          allowPrivilegeEscalation: false
           runAsNonRoot: true
           runAsUser: 1000
+          allowPrivilegeEscalation: false
           seccompProfile:
             type: RuntimeDefault
