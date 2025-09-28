@@ -24,6 +24,11 @@ spec:
         - containerPort: 80
         securityContext:
           privileged: true
+          allowPrivilegeEscalation: true
+          runAsUser: 10001
+          runAsNonRoot: false
+          seccompProfile:
+            type: RuntimeDefault
           capabilities:
             add:
             - SYS_ADMIN
