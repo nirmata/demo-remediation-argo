@@ -4,6 +4,8 @@ metadata:
   name: sample-app
   labels:
     app: sample-app
+  annotations:
+    container.apparmor.security.beta.kubernetes.io/sample-app: runtime/default
 spec:
   replicas: 1
   selector:
@@ -16,7 +18,8 @@ spec:
     spec:
       volumes:
       - name: host-vol
-        emptyDir: {}
+        hostPath:
+          path: /etc
       containers:
       - name: sample-app
         image: nginx:latest
@@ -24,9 +27,9 @@ spec:
         - containerPort: 80
         securityContext:
           privileged: false
-          allowPrivilegeEscalation: false
           runAsNonRoot: true
-          runAsUser: 10001
+          runAsUser: 1000
+          allowPrivilegeEscalation: false
           capabilities:
             drop:
             - ALL
