@@ -29,5 +29,5 @@ spec:
           seccompProfile:
             type: RuntimeDefault
           capabilities:
-            add:
-            - SYS_ADMIN
+            drop:
+            - ALL
