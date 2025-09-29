@@ -25,6 +25,7 @@ spec:
         securityContext:
           privileged: false
           allowPrivilegeEscalation: false
+          runAsUser: 10001
           runAsNonRoot: true
           seccompProfile:
             type: RuntimeDefault
