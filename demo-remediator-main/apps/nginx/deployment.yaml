@@ -4,6 +4,7 @@ metadata:
   name: nginx
   labels:
     app: nginx
+  annotations: {}
 spec:
   replicas: 1
   selector:
@@ -14,6 +15,9 @@ spec:
       labels:
         app: nginx
     spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
       volumes:
       - name: host-vol
         emptyDir: {}
@@ -27,5 +31,3 @@ spec:
           allowPrivilegeEscalation: false
           runAsNonRoot: true
           runAsUser: 1000
-          seccompProfile:
-            type: RuntimeDefault
