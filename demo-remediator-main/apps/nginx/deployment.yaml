@@ -22,8 +22,6 @@ spec:
       - name: host-vol
         hostPath:
           path: /etc
-      - name: etc-vol
-        emptyDir: {}
       containers:
       - name: nginx
         image: nginx:latest
@@ -32,6 +30,5 @@ spec:
         securityContext:
           privileged: false
           allowPrivilegeEscalation: false
-        volumeMounts:
-        - name: etc-vol
-          mountPath: /etc
+          runAsNonRoot: true
+          runAsUser: 1000
