@@ -15,10 +15,15 @@ spec:
       labels:
         app: nginx
     spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
       volumes:
       - name: host-vol
         hostPath:
           path: /etc
+      - name: etc-vol
+        emptyDir: {}
       containers:
       - name: nginx
         image: nginx:latest
@@ -26,5 +31,7 @@ spec:
         - containerPort: 80
         securityContext:
           privileged: false
-          runAsNonRoot: true
-          runAsUser: 1000
+          allowPrivilegeEscalation: false
+        volumeMounts:
+        - name: etc-vol
+          mountPath: /etc
