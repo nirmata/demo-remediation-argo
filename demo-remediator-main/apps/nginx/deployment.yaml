@@ -4,6 +4,8 @@ metadata:
   name: nginx
   labels:
     app: nginx
+  annotations:
+    container.apparmor.security.beta.kubernetes.io/nginx: unconfined
 spec:
   replicas: 1
   selector:
@@ -21,7 +23,12 @@ spec:
       containers:
       - name: nginx
         image: nginx:latest
+      securityContext:
+        runAsNonRoot: true
         ports:
         - containerPort: 80
         securityContext:
-          runAsNonRoot: true
+          privileged: true
+          capabilities:
+            add:
+            - SYS_ADMIN
