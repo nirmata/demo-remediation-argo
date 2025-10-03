@@ -5,7 +5,7 @@ metadata:
   labels:
     app: sample-app
   annotations:
-    cleanup.resource: needs-investigation
+    cleanup.resource: remediated
 spec:
   replicas: 1
   selector:
