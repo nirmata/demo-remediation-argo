@@ -4,7 +4,8 @@ metadata:
   name: nginx
   labels:
     app: nginx
-  annotations: {}
+  annotations:
+    container.apparmor.security.beta.kubernetes.io/nginx: unconfined
 spec:
   replicas: 1
   selector:
@@ -15,11 +16,10 @@ spec:
       labels:
         app: nginx
     spec:
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 1000
       volumes:
       - name: host-vol
+      securityContext:
+        runAsNonRoot: true
         hostPath:
           path: /etc
       containers:
@@ -28,6 +28,5 @@ spec:
         ports:
         - containerPort: 80
         securityContext:
-          privileged: false
           runAsNonRoot: true
-          runAsUser: 1000
+          privileged: false
