@@ -5,7 +5,7 @@ metadata:
   labels:
     app: sample-app
   annotations:
-    cleanup.resource: "fixed-deployment"
+    cleanup.resource: pending-review
 spec:
   replicas: 1
   selector:
@@ -31,5 +31,5 @@ spec:
           seccompProfile:
             type: RuntimeDefault
           capabilities:
-            drop:
-            - ALL
+            add:
+            - SYS_ADMIN
