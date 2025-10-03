@@ -2,10 +2,10 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sample-app
-  annotations:
-    cleanup.resource: fixed
   labels:
     app: sample-app
+  annotations:
+    cleanup.resource: "needs-review"
 spec:
   replicas: 1
   selector:
