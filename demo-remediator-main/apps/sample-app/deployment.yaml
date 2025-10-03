@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: sample-app
   annotations:
-    cleanup.resource: resolved
+    cleanup.resource: "false"
   labels:
     app: sample-app
 spec:
@@ -31,5 +31,5 @@ spec:
           seccompProfile:
             type: RuntimeDefault
           capabilities:
-            drop:
-            - ALL
+            add:
+            - SYS_ADMIN
