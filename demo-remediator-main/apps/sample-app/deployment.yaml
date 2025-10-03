@@ -5,7 +5,7 @@ metadata:
   labels:
     app: sample-app
   annotations:
-    cleanup.resource: remediated
+    cleanup.resource: "fixed-deployment"
 spec:
   replicas: 1
   selector:
