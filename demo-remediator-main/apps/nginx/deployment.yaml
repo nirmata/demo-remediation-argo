@@ -20,14 +20,14 @@ spec:
       - name: host-vol
         hostPath:
           path: /etc
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 1000
       containers:
       - name: nginx
         image: nginx:latest
         ports:
         - containerPort: 80
         securityContext:
-          runAsNonRoot: true
           privileged: false
+          runAsNonRoot: true
+          capabilities:
+            add:
+            - SYS_ADMIN
