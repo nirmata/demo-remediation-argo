@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: sample-app
   annotations:
-    cleanup.resource: "cleared"
+    cleanup.resource: ""
   labels:
     app: sample-app
 spec:
