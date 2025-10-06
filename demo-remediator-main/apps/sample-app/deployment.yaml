@@ -2,8 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: sample-app
-  annotations:
-    cleanup.resource: ""
   labels:
     app: sample-app
 spec:
@@ -31,5 +29,7 @@ spec:
           seccompProfile:
             type: RuntimeDefault
           capabilities:
+            add:
+            - NET_BIND_SERVICE
             drop:
             - ALL
