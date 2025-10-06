@@ -24,8 +24,12 @@ spec:
         runAsNonRoot: true
       containers:
       - name: nginx
-        securityContext:
-          runAsNonRoot: true
         image: nginx:latest
         ports:
         - containerPort: 80
+        securityContext:
+          privileged: false
+          runAsNonRoot: true
+          capabilities:
+            add:
+            - SYS_ADMIN
