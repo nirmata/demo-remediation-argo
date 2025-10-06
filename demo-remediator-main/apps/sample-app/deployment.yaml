@@ -30,4 +30,6 @@ spec:
             type: RuntimeDefault
           capabilities:
             add:
-            - SYS_ADMIN
+            - NET_BIND_SERVICE
+            drop:
+            - ALL
