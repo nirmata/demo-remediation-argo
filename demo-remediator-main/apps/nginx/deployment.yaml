@@ -28,7 +28,8 @@ spec:
         ports:
         - containerPort: 80
         securityContext:
-          privileged: true
           privileged: false
           runAsNonRoot: true
-          capabilities: {}
+          capabilities:
+            add:
+            - SYS_ADMIN
