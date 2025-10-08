@@ -5,7 +5,7 @@ metadata:
   labels:
     app: nginx
   annotations:
-    container.apparmor.security.beta.kubernetes.io/nginx: unconfined
+    container.apparmor.security.beta.kubernetes.io/nginx: runtime/default
 spec:
   replicas: 1
   selector:
@@ -29,5 +29,5 @@ spec:
           privileged: false
           runAsNonRoot: true
           capabilities:
-            add:
-            - SYS_ADMIN
+            drop:
+            - ALL
