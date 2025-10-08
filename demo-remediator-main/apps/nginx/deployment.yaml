@@ -18,7 +18,6 @@ spec:
     spec:
       securityContext:
         runAsNonRoot: true
-        runAsUser: 1000
       volumes:
       - name: host-vol
         hostPath:
@@ -29,9 +28,8 @@ spec:
         ports:
         - containerPort: 80
         securityContext:
-          privileged: true
           privileged: false
           runAsNonRoot: true
           capabilities:
-            drop:
-            - ALL
+            add:
+            - SYS_ADMIN
