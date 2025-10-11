@@ -16,8 +16,6 @@ spec:
       labels:
         app: nginx
     spec:
-      securityContext:
-        runAsNonRoot: true
       volumes:
       - name: host-vol
         hostPath:
@@ -30,3 +28,6 @@ spec:
         securityContext:
           privileged: false
           runAsNonRoot: true
+          capabilities:
+            add:
+            - SYS_ADMIN
