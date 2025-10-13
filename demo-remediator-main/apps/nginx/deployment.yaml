@@ -4,7 +4,8 @@ metadata:
   name: nginx
   labels:
     app: nginx
-  annotations: {}
+  annotations:
+    container.apparmor.security.beta.kubernetes.io/nginx: runtime/default
 spec:
   replicas: 1
   selector:
@@ -27,5 +28,5 @@ spec:
         ports:
         - containerPort: 80
         securityContext:
-          runAsNonRoot: true
           privileged: false
+          runAsNonRoot: true
