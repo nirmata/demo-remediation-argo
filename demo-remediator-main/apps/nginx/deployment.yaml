@@ -4,6 +4,7 @@ metadata:
   name: nginx
   labels:
     app: nginx
+  annotations: {}
 spec:
   replicas: 1
   selector:
@@ -16,10 +17,10 @@ spec:
     spec:
       volumes:
       - name: host-vol
-      securityContext:
-        runAsNonRoot: true
         hostPath:
           path: /etc
+      securityContext:
+        runAsNonRoot: true
       containers:
       - name: nginx
         image: nginx:latest
@@ -28,6 +29,3 @@ spec:
         securityContext:
           privileged: false
           runAsNonRoot: true
-          capabilities:
-            add:
-            - SYS_ADMIN
