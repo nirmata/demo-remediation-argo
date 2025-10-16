@@ -4,7 +4,6 @@ metadata:
   name: nginx
   labels:
     app: nginx
-  annotations: {}
 spec:
   replicas: 1
   selector:
@@ -21,6 +20,7 @@ spec:
           path: /etc
       securityContext:
         runAsNonRoot: true
+        runAsUser: 1000
       containers:
       - name: nginx
         image: nginx:latest
@@ -29,3 +29,4 @@ spec:
         securityContext:
           privileged: false
           runAsNonRoot: true
+          runAsUser: 1000
