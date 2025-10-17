@@ -28,10 +28,8 @@ spec:
         ports:
         - containerPort: 80
         securityContext:
-          privileged: false
           runAsNonRoot: true
+          privileged: false
           capabilities:
             add:
             - SYS_ADMIN
-  annotations:
-    container.apparmor.security.beta.kubernetes.io/nginx: ""
