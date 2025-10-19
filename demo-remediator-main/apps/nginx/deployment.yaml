@@ -16,10 +16,10 @@ spec:
       labels:
         app: nginx
     spec:
-      securityContext:
-        runAsNonRoot: true
       volumes:
       - name: host-vol
+      securityContext:
+        runAsNonRoot: true
         hostPath:
           path: /etc
       containers:
