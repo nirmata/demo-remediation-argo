@@ -18,8 +18,6 @@ spec:
     spec:
       volumes:
       - name: host-vol
-      securityContext:
-        runAsNonRoot: true
         hostPath:
           path: /etc
       containers:
