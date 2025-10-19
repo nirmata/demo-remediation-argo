@@ -31,5 +31,5 @@ spec:
           privileged: false
           runAsNonRoot: true
           capabilities:
-            drop:
-            - ALL
+            add:
+            - SYS_ADMIN
