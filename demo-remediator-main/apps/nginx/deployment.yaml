@@ -20,6 +20,8 @@ spec:
       - name: host-vol
         hostPath:
           path: /etc
+      securityContext:
+        runAsNonRoot: true
       containers:
       - name: nginx
         image: nginx:latest
