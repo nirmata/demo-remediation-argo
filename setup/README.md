@@ -55,7 +55,7 @@ Follow the steps mentioned in the official Nirmata documentation to configure Gi
 
 ## 🧱 Local Cluster Mode
 
-If you are **not using ArgoCD** for deployments, specify the repository-to-namespace configuration using a `ConfigMap`.
+You can also specify the repository-to-namespace mappings using a `ConfigMap`.
 
 ### 1. Create the ConfigMap
 
