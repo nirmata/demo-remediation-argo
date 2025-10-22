@@ -141,3 +141,83 @@ kubectl get pods -n nirmata
 ```
 
 You should see the **remediator-agent** running successfully.
+
+---
+
+
+
+
+# 🚀 Steps to Deploy and Configure ArgoCD
+
+## Step 1: Deploy ArgoCD
+
+### 1.1 Create ArgoCD Namespace
+```bash
+kubectl create namespace argocd
+```
+
+### 1.2 Install ArgoCD
+```bash
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
+
+### 1.3 Wait for ArgoCD to be Ready
+```bash
+kubectl wait --for=condition=available --timeout=300s deployment/argocd-server -n argocd
+```
+
+## Step 2: Create the Nginx Demo Application
+
+### 2.1 Deploy the Application
+```bash
+kubectl apply -f - <<EOF
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-demo
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/nirmata/demo-remediation-argo
+    targetRevision: main
+    path: demo-remediator-main/apps/nginx
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - CreateNamespace=true
+EOF
+```
+
+## Step 3: Access ArgoCD UI
+
+### 3.1 Set up Port Forwarding
+```bash
+kubectl port-forward svc/argocd-server -n argocd 8080:443
+```
+
+### 3.2 Get Admin Password
+```bash
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+```
+
+### 3.3 Access ArgoCD
+- **URL**: https://localhost:8080
+- **Username**: `admin`
+- **Password**: (output from step 3.2)
+
+## Step 4: Verify Application Sync
+
+1. Open your browser and navigate to https://localhost:8080
+2. Login with the credentials from step 3.2
+3. You should see the `nginx-demo` application in the ArgoCD UI
+4. The application will automatically sync the nginx demo from the specified repository
+
+## Managing Auto-Sync
+
+You can disable AUTO-SYNC by clicking on the application in ArgoCD → Navigate to details and hover at the bottom under sync policy.
