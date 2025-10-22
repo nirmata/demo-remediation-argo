@@ -49,7 +49,7 @@ helm install remediator nirmata/remediator-agent --devel   --namespace nirmata  
 ### 3. Configure Git Credentials
 
 Follow the steps mentioned in the official Nirmata documentation to configure Git credentials:  
-👉 [Using Personal Access Token](https://docs.nirmata.io/docs/agents/service-agents/remediator/tools/#using-personal-access-token)
+👉 [Using Nirmata App or Personal Access Token](https://docs.nirmata.io/docs/agents/service-agents/remediator/tools/#using-personal-access-token)
 
 ---
 
