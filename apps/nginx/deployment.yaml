@@ -3,6 +3,7 @@ kind: Deployment
 metadata:
   labels:
     app: nginx
+    team: app32
   name: nginx
   namespace: default
 spec:
