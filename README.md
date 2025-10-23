@@ -55,7 +55,7 @@ helm install remediator nirmata/remediator-agent --devel   --namespace nirmata  
 ### 3. Configure Git Credentials
 
 Follow the steps mentioned in the official Nirmata documentation to configure Git credentials:  
-👉 [Using Nirmata App or Personal Access Token](https://docs.nirmata.io/docs/agents/service-agents/remediator/tools/#using-personal-access-token)
+👉 [Using Nirmata App or Personal Access Token](https://docs.nirmata.io/docs/ai/agents/remediator/tools/#using-personal-access-token)
 
 ---
 
@@ -301,7 +301,8 @@ The Application should be in failed state showing policy violations.
 Trigger the remediation agent by deleting its pod:
 
 ```sh
-kubectl -n nirmata rollout restart deployment deploy/remediator-agent
+kubectl -n nirmata scale deploy/remediator-agent --replicas 0
+kubectl -n nirmata scale deploy/remediator-agent --replicas 1
 ```
 
 This will restart the agent and initiate the remediation process.
@@ -309,7 +310,7 @@ This will restart the agent and initiate the remediation process.
 ## View the logs
 
 ```sh
-kubectl -n nirmata rollout restart deployment deploy/remediator-agent
+kubectl -n nirmata logs deploy/remediator-agent -f
 ```
 
 ## Check the GitHub repo for a PR
