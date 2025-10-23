@@ -4,7 +4,7 @@ metadata:
   name: nginx-demo
   namespace: argocd
 spec:
-  project: nginx
+  project: default
   source:
     repoURL: https://github.com/nirmata/demo-remediation-argo
     targetRevision: main
