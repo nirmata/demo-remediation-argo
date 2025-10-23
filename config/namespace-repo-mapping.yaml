@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: namespace-repo-mapping
+  namespace: nirmata
+data:
+  mapping: |
+    [
+      {
+        "repo": "https://github.com/nirmata/demo-remediation-argo",
+        "branch": "main",
+        "path": "apps/nginx",
+        "targetNamespace": "default"
+      }
+    ]
