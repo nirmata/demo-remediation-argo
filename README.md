@@ -184,6 +184,7 @@ kubectl port-forward svc/argocd-server -n argocd 8080:443
 ```
 
 ### 3.2 Get Admin Password
+
 ```bash
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ```
@@ -204,14 +205,10 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
 
 You can disable AUTO-SYNC by clicking on the application in ArgoCD → Navigate to details and hover at the bottom under sync policy.
 
-</details>
-</p></p>
-
-# Demo Script
-
 Note, make sure the application is already running and in-sync:
 
-### Install Kyverno
+
+# Install & Configure Kyverno
 
 ```sh
 helm repo add kyverno https://kyverno.github.io/kyverno/
@@ -236,8 +233,6 @@ Restart Kyverno:
 ```sh
 kubectl -n kyverno rollout restart deployments
 ```
-
-
 
 ## Install Policies
 
@@ -283,6 +278,24 @@ kubectl get clusterpolicy -o name | xargs -I {} kubectl patch {} --type=merge -p
 
 Redeploy the application (delete the pod/resource using kubectl and then hit sync in ArgoCD) and you should see ArgoCD blocking the deployment due to policy enforcement.
 
+</details>
+</p></p>
+
+# Demo Script
+
+## Connect to the ArgoCD UI:
+
+```bash
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+```
+
+### 3.3 Access ArgoCD
+- **URL**: https://localhost:8080
+- **Username**: `admin`
+- **Password**: (output from step 3.2)
+
+The Application should be in failed state showing policy violations.
+
 ## Trigger the Remediation Agent
 
 Trigger the remediation agent by deleting its pod:
@@ -298,4 +311,8 @@ This will restart the agent and initiate the remediation process.
 ```sh
 kubectl -n nirmata rollout restart deployment deploy/remediator-agent
 ```
+
+## Check the GitHub repo for a PR
+
+
 
