@@ -4,14 +4,14 @@ metadata:
   name: nginx-demo
   namespace: argocd
 spec:
-  project: default
+  project: nginx
   source:
     repoURL: https://github.com/nirmata/demo-remediation-argo
     targetRevision: main
     path: apps/nginx
   destination:
     server: https://kubernetes.default.svc
-    namespace: default
+    namespace: nginx
   syncPolicy:
     automated:
       prune: true
