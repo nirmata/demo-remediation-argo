@@ -20,3 +20,6 @@ spec:
       - image: nginx
         imagePullPolicy: Always
         name: nginx
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsNonRoot: true
