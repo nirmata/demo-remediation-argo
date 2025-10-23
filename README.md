@@ -2,9 +2,10 @@
 
 See: https://docs.google.com/document/d/1eurCPTuj7Nik04Smr40BQaWyVNm3iGPNOKz4hQhFA-0/edit?tab=t.0
 
-
+<H2>
 <details>
   <summary>Installation Guide</summary>
+</H2>
 
 ## 🧩 Required Components
 
@@ -278,7 +279,9 @@ kubectl get clusterpolicy -o name | xargs -I {} kubectl patch {} --type=merge -p
 
 Redeploy the application (delete the pod/resource using kubectl and then hit sync in ArgoCD) and you should see ArgoCD blocking the deployment due to policy enforcement.
 
+<H2>
 </details>
+</H2>
 </p></p>
 
 # Demo Script
