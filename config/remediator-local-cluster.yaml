@@ -1,0 +1,34 @@
+apiVersion: serviceagents.nirmata.io/v1alpha1
+kind: Remediator
+metadata:
+  name: remediator-local-cluster
+  namespace: nirmata
+spec:
+  environment:
+    type: localCluster
+  
+  target:
+    localCluster:
+      repoNamespaceMappingRef:
+        name: repo-namespace-mapping
+        namespace: nirmata
+        key: mapping
+
+  remediation:
+    triggers:
+      - schedule:
+          crontab: "0 */6 * * *"
+
+    llmConfigRef:
+      name: remediator-agent-llm
+      namespace: nirmata
+
+    gitCredentials:
+      name: toolconfig-sample
+      namespace: nirmata
+
+    actions:
+      - type: CreatePR
+        toolRef:
+          name: toolconfig-sample
+          namespace: nirmata

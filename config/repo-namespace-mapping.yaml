@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: repo-namespace-mapping
+  namespace: nirmata
+data:
+  mapping: |
+    [
+      {
+        "repo": "https://github.com/nirmata/demo-remediator",
+        "branch": "main",
+        "path": "apps/nginx",
+        "targetNamespace": "default"
+      }
+    ]

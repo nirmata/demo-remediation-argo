@@ -6,16 +6,15 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/nirmata/demo-remediator.git
-    targetRevision: HEAD
+    repoURL: https://github.com/nirmata/demo-remediation-argo
+    targetRevision: main
     path: apps/nginx
   destination:
-    server: https://D130D24E1665A9C2D1AF12D0C7BDD7B8.yl4.us-west-1.eks.amazonaws.com
-    namespace: nginx
+    server: https://kubernetes.default.svc
+    namespace: default
   syncPolicy:
     automated:
       prune: true
       selfHeal: true
     syncOptions:
     - CreateNamespace=true
-
