@@ -61,19 +61,19 @@ Follow the steps mentioned in the official Nirmata documentation to configure Gi
 
 ## 🧱 Local Cluster Mode
 
-You can also specify the repository-to-namespace mappings using a `ConfigMap`.
+You can also specify the namespace-to-repo mappings using a `ConfigMap`.
 
 ### 1. Create the ConfigMap
 
 ```sh
-kubectl apply -f config/cm-repo-namespace-mapping.yaml
+kubectl apply -f config/namespace-repo-mapping.yaml
 ```
 
 ```yaml
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: repo-namespace-mapping
+  name: namespace-repo-mapping
   namespace: nirmata
 data:
   mapping: |
@@ -92,7 +92,7 @@ data:
 ### 2. Apply the Remediator CR
 
 ```sh
-kubectl apply -f config/cm-repo-namespace-mapping.yaml
+kubectl apply -f config/cm-namespace-repo-mapping.yaml
 ```
 
 ```yaml
@@ -108,7 +108,7 @@ spec:
   target:
     localCluster:
       repoNamespaceMappingRef:
-        name: repo-namespace-mapping
+        name: namespace-repo-mapping
         namespace: nirmata
         key: mapping
 
@@ -283,18 +283,19 @@ Redeploy the application (delete the pod/resource using kubectl and then hit syn
 
 # Demo Script
 
+**NOTE: Complete all steps in the `Installation Guide` section first.**
+
 ## Connect to the ArgoCD UI:
 
 ```bash
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ```
 
-### 3.3 Access ArgoCD
 - **URL**: https://localhost:8080
 - **Username**: `admin`
 - **Password**: (output from step 3.2)
 
-The Application should be in failed state showing policy violations.
+The application should be in failed state showing policy violations.
 
 ## Trigger the Remediation Agent
 
@@ -314,6 +315,8 @@ kubectl -n nirmata logs deploy/remediator-agent -f
 ```
 
 ## Check the GitHub repo for a PR
+
+https://github.com/nirmata/demo-remediation-argo
 
 
 

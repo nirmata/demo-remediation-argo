@@ -10,7 +10,7 @@ spec:
   target:
     localCluster:
       repoNamespaceMappingRef:
-        name: repo-namespace-mapping
+        name: namespace-repo-mapping
         namespace: nirmata
         key: mapping
 
