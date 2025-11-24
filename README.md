@@ -9,7 +9,8 @@ See: https://docs.google.com/document/d/1eurCPTuj7Nik04Smr40BQaWyVNm3iGPNOKz4hQh
 
 - **Kubernetes Cluster:** Running Kubernetes **v1.20+**  
 - **Helm:** Version **3.x** installed and configured  
-- **kubectl:** Configured to access your cluster  
+- **kubectl:** Configured to access your cluster
+- **N4K with policies:** N4K deployed in the spoke or local cluster with policies
 
 ---
 
