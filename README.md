@@ -168,38 +168,71 @@ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/st
 kubectl wait --for=condition=available --timeout=300s deployment/argocd-server -n argocd
 ```
 
-## Step 2: Create the Nginx Demo Application
 
-### 2.1 Deploy the Application
+## Step 2: Access ArgoCD UI
 
-```bash
-kubectl apply -f apps/nginx/
-```
-
-## Step 3: Access ArgoCD UI
-
-### 3.1 Set up Port Forwarding
+### 2.1 Set up Port Forwarding
 ```bash
 kubectl port-forward svc/argocd-server -n argocd 8080:443
 ```
 
-### 3.2 Get Admin Password
+### 2.2 Get Admin Password
 
 ```bash
 kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
 ```
 
+## Step 3: Access ArgoCD UI
+   
+
 ### 3.3 Access ArgoCD
 - **URL**: https://localhost:8080
 - **Username**: `admin`
-- **Password**: (output from step 3.2)
+- **Password**: (output from step 2.2)
 
 ## Step 4: Verify Application Sync
 
 1. Open your browser and navigate to https://localhost:8080
 2. Login with the credentials from step 3.2
-3. You should see the `nginx-demo` application in the ArgoCD UI
-4. The application will automatically sync the nginx demo from the specified repository
+3. Navigate to `Settings --> Repo` and sync the git repo
+4. Apply the below Application resource to sync your application
+
+```yaml
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: deploy-app
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/nirmata/demo-reme-ds.git
+    targetRevision: main
+    path: app
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
+
+```
+
+
+
+   
+6. The application will automatically sync the nginx demo from the specified repository
 
 ## Managing Auto-Sync
 
